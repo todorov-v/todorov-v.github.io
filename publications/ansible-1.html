@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Installing Ansible Automation Platform 2.5.5</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            color: #333;
+        }
+        h1, h2 {
+            color: #59A52C;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 4px;
+            font-family: Consolas, monospace;
+            border-radius: 3px;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            overflow-x: auto;
+            border-left: 4px solid #59A52C;
+            margin: 20px 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Installing Ansible Automation Platform 2.5.5 (Containerized)</h1>
+        <h2>Chapter 1: Ansible Automation Platform Containerized Installation</h2>
+        <p>This guide explains the process of installing the containerized version of <strong>Ansible Automation Platform (AAP) 2.5.5</strong>. Follow these steps on a fresh RHEL-based system with administrative access.</p>
+        
+        <h2>System Preparation</h2>
+        <ol>
+            <li><strong>Set the Hostname:</strong>
+                <pre><code>hostnamectl set-hostname aap</code></pre>
+            </li>
+            <li><strong>Register the System:</strong>
+                <pre><code>
+subscription-manager register
+subscription-manager refresh
+                </code></pre>
+            </li>
+            <li><strong>Update the System:</strong>
+                <pre><code>dnf update -y</code></pre>
+            </li>
+            <li><strong>Install Required Tools:</strong>
+                <pre><code>
+dnf install wget tar git rsync ansible-core -y
+sudo dnf install podman -y
+                </code></pre>
+            </li>
+        </ol>
+
+        <h2>Create a User for AAP</h2>
+        <ol>
+            <li><strong>Add and Configure the User:</strong>
+                <pre><code>
+useradd aap
+passwd aap
+usermod -aG wheel aap
+loginctl enable-linger aap
+                </code></pre>
+            </li>
+            <li><strong>Set Up SSH Access for the User:</strong>
+                <pre><code>
+ssh-keygen
+ssh-copy-id localhost
+                </code></pre>
+            </li>
+        </ol>
+
+        <h2>Prepare the Manifest File</h2>
+        <ol>
+            <li><strong>Copy the Manifest File:</strong>
+                <pre><code>
+sudo cp /root/manifest_ansible_manifest_20241125T125115Z.zip /home/aap/
+                </code></pre>
+            </li>
+            <li><strong>Set Proper Permissions:</strong>
+                <pre><code>sudo chmod 777 /home/aap/manifest_ansible_manifest_20241125T125115Z.zip</code></pre>
+            </li>
+        </ol>
+
+        <h2>Download and Extract the Installer</h2>
+        <ol>
+            <li><strong>Extract the Installer:</strong>
+                <pre><code>
+tar zxvf ansible-automation-platform-containerized-setup-bundle-2.5-5-x86_64.tar.gz
+cd ansible-automation-platform-containerized-setup-bundle-2.5-5-x86_64
+                </code></pre>
+            </li>
+            <li><strong>Set the Collections Path:</strong>
+                <pre><code>export ANSIBLE_COLLECTIONS_PATH=/home/aap/ansible-automation-platform-containerized-setup-bundle-2.5-5-x86_64/collections</code></pre>
+            </li>
+        </ol>
+
+        <h2>Edit the Inventory File</h2>
+        <p>Edit the <code>inventory</code> file to customize it for your environment:</p>
+        <pre><code>vi inventory</code></pre>
+
+        <h2>Run the Installation</h2>
+        <ol>
+            <li><strong>Execute the Installation Playbook:</strong>
+                <pre><code>ansible-playbook -i inventory ansible.containerized_installer.install -K</code></pre>
+            </li>
+            <li><strong>Uninstallation (if needed):</strong>
+                <pre><code>ansible-playbook -i inventory ansible.containerized_installer.uninstall -K</code></pre>
+            </li>
+        </ol>
+
+        <p>With the installation complete, you can now start leveraging the capabilities of <strong>Ansible Automation Platform 2.5.5</strong>. Stay tuned for further chapters exploring its powerful features!</p>
+    </div>
+</body>
+</html>
