@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Stop and Start vRealize Automation 8.3</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            color: #333;
+        }
+        h1, h2 {
+            color: #59A52C;
+        }
+        img {
+            display: block;
+            margin: 20px auto;
+            max-width: 100%;
+            height: auto;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 4px;
+            font-family: Consolas, monospace;
+            border-radius: 3px;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            overflow-x: auto;
+            border-left: 4px solid #59A52C;
+            margin: 20px 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>How to Stop and Start vRealize Automation 8.3</h1>
+        <p>The recommended manner to shut down and start vRealize Automation components is to use the <strong>Power OFF</strong> and <strong>ON</strong> functionality provided in the <em>Lifecycle Operations > Environments</em> section of vRealize Suite Lifecycle Manager.</p>
+        <img src="/files/vra-1.jpg" alt="vRealize Automation Diagram">
+        <p>The following procedures outline manual methods to shut down and start vRealize Automation components in case vRealize Suite Lifecycle Manager is not available for some reason.</p>
+        
+        <h2>Shut Down vRealize Automation</h2>
+        <p>To preserve data integrity, shut down the vRealize Automation services before powering off the virtual appliances. Using SSH or VMRC, you can shut down or start all nodes from any individual appliance.</p>
+        <pre><code>/opt/scripts/svc-stop.sh
+
+sleep 120
+
+/opt/scripts/deploy.sh --onlyClean
+        </code></pre>
+        <p>Shut down the vRealize Automation appliances. Your vRealize Automation deployment is now shut down.</p>
+
+        <h2>Start vRealize Automation</h2>
+        <p>Log into the console for any appliance using SSH or VMRC and run the following command to restore the services on all nodes:</p>
+        <pre><code>/opt/scripts/deploy.sh</code></pre>
+        <p>Verify that all services are up and running with the following command:</p>
+        <pre><code>kubectl get pods --all-namespaces</code></pre>
+    </div>
+</body>
+</html>
