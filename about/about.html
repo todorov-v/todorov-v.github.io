@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About - Technosa</title>
+    <title>Technosa. Passion for Technology</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -13,13 +13,13 @@
             background-color: #f8f8f8;
         }
         header {
-            background-color: #59A52C; /* Green */
+            background-color: #59A52C; /* Updated Green */
             color: white;
             padding: 10px 20px;
             text-align: center;
         }
         nav {
-            background-color: #4d9228; /* Darker Green */
+            background-color: #4d9228; /* Slightly darker green for nav */
             overflow: hidden;
         }
         nav a {
@@ -31,7 +31,7 @@
             text-decoration: none;
         }
         nav a:hover, nav .dropdown:hover .dropbtn {
-            background-color: #3b7020;
+            background-color: #3b7020; /* Even darker green for hover */
         }
         nav .dropdown {
             float: left;
@@ -49,7 +49,7 @@
         nav .dropdown-content {
             display: none;
             position: absolute;
-            background-color: #59A52C;
+            background-color: #59A52C; /* Matches header green */
             min-width: 160px;
             z-index: 1;
         }
@@ -72,25 +72,21 @@
             padding: 20px;
         }
         .content {
+            flex: 3;
+            padding-right: 20px;
+        }
+        .right-column {
             flex: 1;
+            background-color: #ddd; /* Light Gray */
             padding: 20px;
-            background-color: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 5px;
+            border-left: 2px solid #bbb; /* Medium Gray */
         }
         footer {
-            background-color: #59A52C;
+            background-color: #59A52C; /* Matches header green */
             color: white;
             text-align: center;
             padding: 10px 0;
             margin-top: 20px;
-        }
-        h1, h2, h3 {
-            color: #59A52C;
-        }
-        ul {
-            list-style-type: square;
-            margin-left: 20px;
         }
     </style>
 </head>
@@ -99,25 +95,25 @@
         <h1>Technosa. Passion for Technology</h1>
     </header>
     <nav>
-        <a href="../home/home.html">Home</a>
-        <a href="about.html">About</a>
+        <a href="index.html">Home</a>
+        <a href="about/about.html">About</a>
         <div class="dropdown">
             <button class="dropbtn">Infrastructure</button>
             <div class="dropdown-content">
-                <a href="../infrastructure/servers.html">Servers</a>
-                <a href="../infrastructure/storages.html">Storages</a>
-                <a href="../infrastructure/databases.html">Databases</a>
+                <a href="infrastructure/servers.html">Servers</a>
+                <a href="infrastructure/storages.html">Storages</a>
+                <a href="infrastructure/databases.html">Databases</a>
             </div>
         </div>
         <div class="dropdown">
             <button class="dropbtn">Automation</button>
             <div class="dropdown-content">
-                <a href="../automation/aria.html">Aria</a>
-                <a href="../automation/ansible.html">Ansible Automation</a>
-                <a href="../automation/apis.html">APIs</a>
+                <a href="automation/aria.html">Aria</a>
+                <a href="automation/ansible.html">Ansible Automation</a>
+                <a href="automation/apis.html">APIs</a>
             </div>
         </div>
-        <a href="../contact/contact.html">Contact</a>
+        <a href="contact/contact.html">Contact</a>
     </nav>
     <main>
         <div class="content">
@@ -161,6 +157,14 @@
             </ul>
             <h3>Professional Approach:</h3>
             <p>I combine technical proficiency with strong leadership skills to deliver robust IT solutions that align with business objectives. My experience across multiple industries has equipped me with a versatile skill set, enabling me to tackle complex challenges and drive technological advancements within organizations.</p>
+        </div>
+        <div class="right-column">
+            <h3>Latest Publications</h3>
+            <ul>
+                <li><a href="publications/publication1.html">Publication 1</a></li>
+                <li><a href="publications/publication2.html">Publication 2</a></li>
+                <li><a href="publications/publication3.html">Publication 3</a></li>
+            </ul>
         </div>
     </main>
     <footer>
