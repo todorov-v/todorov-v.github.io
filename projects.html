@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Projects – Technosa</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<header>
+  <h1>Technosa. Passion for Technology</h1>
+</header>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="projects.html">Projects</a>
+  <a href="publications.html">Publications</a>
+</nav>
+
+<div class="container">
+  <main class="main-col">
+    <section class="section">
+      <h2>Projects & Case Studies</h2>
+      <p class="muted">Selected real-world projects in virtualization, automation and disaster recovery.</p>
+    </section>
+
+    <section class="section">
+      <h3>VMware to Nutanix Migration</h3>
+      <p>
+        Migrated 100+ virtual machines with near zero-downtime, standardized images, and optimized performance.
+        Redesigned backup policies and <strong>disaster recovery strategy</strong> for improved resilience and restore time.
+      </p>
+      <ul>
+        <li>VM migration and validation (compute & storage)</li>
+        <li>Backup redesign and Commvault policy standardization</li>
+        <li>DR workflows optimized for RTO/RPO targets</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h3>VM Provisioning Automation & Day-2 Operations</h3>
+      <p>
+        Implemented full lifecycle automation using <strong>VMware Aria</strong> for Day-0 provisioning and 
+        <strong>AWX (Ansible Tower)</strong> for Day-2 operations. The result — consistent, version-controlled 
+        deployments and automated configuration drift management.
+      </p>
+      <ul>
+        <li>Aria blueprints and extensibility actions</li>
+        <li>AWX playbooks for patching, backup, and lifecycle operations</li>
+        <li>Integrated GitOps workflows and dynamic IP assignment</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h3>Disaster Recovery Orchestration (SRM + Aria)</h3>
+      <p>
+        Combined <strong>VMware Site Recovery Manager (SRM)</strong> with <strong>Aria Automation</strong> to achieve 
+        consistent, repeatable, and monitored DR workflows. Automated recovery plans reduced manual intervention 
+        and guaranteed predictable failover testing.
+      </p>
+      <ul>
+        <li>SRM recovery plan automation via Aria extensibility</li>
+        <li>Automated protection group updates and monitoring</li>
+        <li>Runbooks integrated into Aria workflows</li>
+      </ul>
+    </section>
+  </main>
+
+  <aside class="right-col">
+    <h3>Latest Publications</h3>
+    <ul>
+      <li><a href="blog/docker-notes.html">General Docker Notes — Build, Deploy, Troubleshoot</a></li>
+      <li><a href="blog/aria-day2-operations.html">VMware Aria Day-2 Operations — Start, Stop, Update</a></li>
+      <li><a href="blog/aap-2-5-5-install.html">Install Ansible Automation Platform 2.5.5</a></li>
+    </ul>
+  </aside>
+</div>
+
+<footer>
+  © 2024 Technosa. All rights reserved.
+</footer>
+
+</body>
+</html>

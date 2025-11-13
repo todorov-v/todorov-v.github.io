@@ -1,136 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Technosa. Passion for Technology</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            color: #333;
-            background-color: #f8f8f8;
-        }
-        header {
-            background-color: #59A52C; /* Updated Green */
-            color: white;
-            padding: 10px 20px;
-            text-align: center;
-        }
-        nav {
-            background-color: #4d9228; /* Slightly darker green for nav */
-            overflow: hidden;
-        }
-        nav a {
-            float: left;
-            display: block;
-            color: white;
-            text-align: center;
-            padding: 14px 20px;
-            text-decoration: none;
-        }
-        nav a:hover, nav .dropdown:hover .dropbtn {
-            background-color: #3b7020; /* Even darker green for hover */
-        }
-        nav .dropdown {
-            float: left;
-            overflow: hidden;
-        }
-        nav .dropdown .dropbtn {
-            cursor: pointer;
-            font-size: 16px;
-            border: none;
-            outline: none;
-            background: none;
-            color: white;
-            padding: 14px 20px;
-        }
-        nav .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #59A52C; /* Matches header green */
-            min-width: 160px;
-            z-index: 1;
-        }
-        nav .dropdown-content a {
-            float: none;
-            color: white;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            text-align: left;
-        }
-        nav .dropdown-content a:hover {
-            background-color: #4d9228;
-        }
-        nav .dropdown:hover .dropdown-content {
-            display: block;
-        }
-        main {
-            display: flex;
-            padding: 20px;
-        }
-        .content {
-            flex: 3;
-            padding-right: 20px;
-        }
-        .right-column {
-            flex: 1;
-            background-color: #ddd; /* Light Gray */
-            padding: 20px;
-            border-left: 2px solid #bbb; /* Medium Gray */
-        }
-        footer {
-            background-color: #59A52C; /* Matches header green */
-            color: white;
-            text-align: center;
-            padding: 10px 0;
-            margin-top: 20px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Technosa – Passion for Technology</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-    <header>
-        <h1>Technosa. Passion for Technology</h1>
-    </header>
-    <nav>
-        <a href="/index.html">Home</a>
-        <a href="/about/about.html">About</a>
-        <div class="dropdown">
-            <button class="dropbtn">Infrastructure</button>
-            <div class="dropdown-content">
-                <a href="/infrastructure/servers.html">Servers</a>
-                <a href="/infrastructure/storages.html">Storages</a>
-                <a href="/infrastructure/databases.html">Databases</a>
-            </div>
-        </div>
-        <div class="dropdown">
-            <button class="dropbtn">Automation</button>
-            <div class="dropdown-content">
-                <a href="/automation/aria.html">Aria</a>
-                <a href="/automation/ansible.html">Ansible Automation</a>
-                <a href="/automation/apis.html">APIs</a>
-            </div>
-        </div>
-        <a href="/contact/contact.html">Contact</a>
-    </nav>
-    <main>
-        <div class="content">
-            <h2>Personal Bolg</h2>
-            <p>Infrastture and automation topics.</p>
-        </div>
-        <div class="right-column">
-            <h3>Latest Publications</h3>
-            <ul>
-                <li><a href="/publications/ansible-1.html">Install Ansible Automation Platform 2.5.5</a></li>
-                <li><a href="/publications/publication2.html">Publication 2</a></li>
-                <li><a href="/publications/publication3.html">Publication 3</a></li>
-            </ul>
-        </div>
-    </main>
-    <footer>
-        <p>&copy; 2024 Technosa. All rights reserved.</p>
-    </footer>
+
+<header>
+  <h1>Technosa. Passion for Technology</h1>
+</header>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="projects.html">Projects</a>
+  <a href="publications.html">Publications</a>
+</nav>
+
+<div class="container">
+  <main class="main-col">
+    <section class="section">
+      <h2>Welcome</h2>
+      <p>
+        I'm <strong>Vladimir</strong>, an infrastructure & automation engineer who designs
+        reliable, scalable and automated IT platforms. Here I share architectures,
+        practical notes, and case studies from real projects.
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>Core Areas</h2>
+      <ul>
+        <li>Modern <strong>infrastructure & virtualization</strong> (VMware, OpenShift Virtualization)</li>
+        <li><strong>Automation</strong> with Ansible, APIs, GitOps and IaC</li>
+        <li><strong>Disaster Recovery</strong> – SRM, Commvault, runbooks & testing</li>
+        <li>Hybrid cloud strategy & operations</li>
+      </ul>
+    </section>
+  </main>
+
+  <aside class="right-col">
+    <h3>Latest Publications</h3>
+    <ul>
+      <li><a href="blog/docker-notes.html">General Docker Notes — Build, Deploy, Troubleshoot</a></li>
+      <li><a href="blog/aria-day2-operations.html">VMware Aria Day-2 Operations — Start, Stop, Update</a></li>
+      <li><a href="blog/aap-2-5-5-install.html">Install Ansible Automation Platform 2.5.5</a></li>
+    </ul>
+  </aside>
+</div>
+
+<footer>
+  © 2024 Technosa. All rights reserved.
+</footer>
+
 </body>
 </html>
