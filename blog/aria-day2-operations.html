@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>VMware Aria Day-2 Operations – Technosa</title>
+  <link rel="stylesheet" href="../style.css"/>
+</head>
+<body>
+
+<header>
+  <h1>Technosa. Passion for Technology</h1>
+</header>
+
+<nav>
+  <a href="../index.html">Home</a>
+  <a href="../about.html">About</a>
+  <a href="../projects.html">Projects</a>
+  <a href="../publications.html">Publications</a>
+</nav>
+
+<div class="container">
+  <main class="main-col">
+    <section class="section">
+      <h2>VMware Aria Day-2 Operations — Start, Stop, Update</h2>
+      <p class="muted">Practical guide for managing Day-2 lifecycle actions in Aria Automation (vRA): built-in, custom, and API-driven workflows.</p>
+    </section>
+
+    <section class="section">
+      <h3>1) Built-in Actions</h3>
+      <ul>
+        <li>Start, Stop, Reboot, Suspend — directly on VM resources.</li>
+        <li>Change CPU, RAM, or Disk through “Update” actions (if policy allows).</li>
+        <li>Control visibility and access with Service Broker entitlements.</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h3>2) Custom Actions (ABX / Orchestrator)</h3>
+      <p>For advanced scenarios, create custom Day-2 actions via ABX (Python/Node) or Orchestrator workflows.</p>
+      <pre><code># ABX Python example
+def handler(context, inputs):
+    vm_id = inputs.get("resourceId")
+    return {"message": f"PowerOn initiated for {vm_id}"}
+</code></pre>
+      <ul>
+        <li>ABX — quick, serverless integrations (REST, CMDB, tags).</li>
+        <li>Orchestrator — complex vSphere automations and approvals.</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h3>3) Using the API</h3>
+      <p>Day-2 actions are available via REST API. Example flow:</p>
+      <pre><code># Get VM resourceId
+GET /iaas/api/machines?filter=name eq 'vm01'
+
+# List available actions
+GET /deployment/api/deployments/{deploymentId}/resources/{resourceId}/actions
+
+# Invoke an action
+POST /deployment/api/deployments/{deploymentId}/resources/{resourceId}/requests
+{
+  "actionId": "PowerOn",
+  "inputs": {}
+}
+</code></pre>
+    </section>
+
+    <section class="section">
+      <h3>4) Update Operations</h3>
+      <ul>
+        <li>Scale up/down CPU or memory.</li>
+        <li>Resize disks or add new ones.</li>
+        <li>Modify tags, metadata, or network assignments.</li>
+      </ul>
+      <pre><code>{
+  "actionId": "UpdateMachine",
+  "inputs": {
+    "cpuCount": 4,
+    "memoryInMB": 8192
+  }
+}
+</code></pre>
+    </section>
+
+    <section class="section">
+      <h3>5) Governance & Policies</h3>
+      <ul>
+        <li>Custom forms to show only approved parameters.</li>
+        <li>Approval policies for high-impact updates.</li>
+        <li>Event subscriptions for pre/post hooks.</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h3>6) Best Practices</h3>
+      <ul>
+        <li>Restrict Day-2 actions per project/role.</li>
+        <li>Automate approvals for repeatable changes.</li>
+        <li>Monitor with Activity logs or export to SIEM.</li>
+        <li>Integrate with Aria Operations for visibility.</li>
+      </ul>
+    </section>
+  </main>
+
+  <aside class="right-col">
+    <h3>Related Articles</h3>
+    <ul>
+      <li><a href="docker-notes.html">General Docker Notes — Build, Deploy, Troubleshoot</a></li>
+      <li><a href="aap-2-5-5-install.html">Install Ansible Automation Platform 2.5.5</a></li>
+    </ul>
+  </aside>
+</div>
+
+<footer>
+  © 2024 Technosa. All rights reserved.
+</footer>
+
+</body>
+</html>

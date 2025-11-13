@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Install Ansible Automation Platform 2.5.5 – Technosa</title>
+  <link rel="stylesheet" href="../style.css"/>
+</head>
+<body>
+
+<header>
+  <h1>Technosa. Passion for Technology</h1>
+</header>
+
+<nav>
+  <a href="../index.html">Home</a>
+  <a href="../about.html">About</a>
+  <a href="../projects.html">Projects</a>
+  <a href="../publications.html">Publications</a>
+</nav>
+
+<div class="container">
+  <main class="main-col">
+    <section class="section">
+      <h2>Install Ansible Automation Platform 2.5.5</h2>
+      <p class="muted">
+        High-level notes for installing Red Hat Ansible Automation Platform 2.5.5 using the bundled installer:
+        prerequisites, inventory, setup and basic post-install checks.
+      </p>
+    </section>
+
+    <section class="section">
+      <h3>1) Prerequisites & Planning</h3>
+      <ul>
+        <li>Valid Red Hat subscription for Ansible Automation Platform.</li>
+        <li>Supported RHEL version for AAP 2.5.5 (typically RHEL 8 or 9).</li>
+        <li>DNS records and reverse DNS for nodes.</li>
+        <li>SSH access from installer node to all target nodes.</li>
+        <li>Enough CPU/RAM/disk according to the chosen topology (single node / multi-node).</li>
+      </ul>
+      <p><strong>Recommended:</strong> keep at least one separate node as the “installer/control” machine, even in small labs.</p>
+    </section>
+
+    <section class="section">
+      <h3>2) Download the Bundle</h3>
+      <p>From the Red Hat Customer Portal:</p>
+      <ol>
+        <li>Navigate to <em>Downloads → Red Hat Ansible Automation Platform</em>.</li>
+        <li>Download the <strong>bundle installer</strong> for 2.5.5 (offline content included).</li>
+        <li>Copy the tarball to your installer node.</li>
+      </ol>
+      <pre><code># On installer node
+tar -xvf ansible-automation-platform-setup-bundle-2.5.5-*.tar.gz
+cd ansible-automation-platform-setup-bundle-2.5.5-*/
+</code></pre>
+    </section>
+
+    <section class="section">
+      <h3>3) Prepare the Inventory</h3>
+      <p>The <code>inventory</code> file controls which components are installed where.</p>
+      <p><strong>Simple all-in-one example:</strong></p>
+      <pre><code>[automationcontroller]
+aap-controller.example.local
+
+[automationhub]
+aap-hub.example.local
+
+[database]
+aap-db.example.local
+
+[all:vars]
+admin_password=&lt;StrongPassword&gt;
+pg_host=aap-db.example.local
+pg_password=&lt;DBPassword&gt;
+pg_database=awx
+pg_username=awx
+</code></pre>
+      <p>For a real environment, separate controller, hub and database, and align with official sizing guidelines.</p>
+    </section>
+
+    <section class="section">
+      <h3>4) Run the Installer</h3>
+      <p>Once the inventory is ready and SSH connectivity is verified:</p>
+      <pre><code># Optional: check connectivity
+ansible -i inventory all -m ping
+
+# Run the installer
+./setup.sh
+</code></pre>
+      <ul>
+        <li>Installer will configure repositories, database, controller, hub, and EEs.</li>
+        <li>Watch for failed tasks and fix issues (DNS, subscription, SELinux, firewalld).</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h3>5) Post-Install Checks</h3>
+      <ul>
+        <li>Access the web UI for Automation Controller (URL from installer output).</li>
+        <li>Log in with the <code>admin</code> user and the password from <code>inventory</code>.</li>
+        <li>Verify that:
+          <ul>
+            <li>Projects can sync (Git, etc.).</li>
+            <li>Credentials can be created.</li>
+            <li>Inventory sync works and hosts show up correctly.</li>
+            <li>Job templates can run simple playbooks successfully.</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h3>6) Common Issues & Tips</h3>
+      <ul>
+        <li><strong>Subscription issues:</strong> make sure the host is registered with Red Hat and has AAP entitlements.</li>
+        <li><strong>DNS/SSL problems:</strong> ensure FQDNs and certificates match; avoid using raw IPs.</li>
+        <li><strong>Firewall:</strong> open required ports (HTTP/HTTPS, DB where needed) or use firewalld rules from the docs.</li>
+        <li><strong>Re-running setup:</strong> small changes in the inventory can usually be applied by re-running <code>setup.sh</code>, but for major topology changes follow official guidance.</li>
+      </ul>
+      <p>For production, also plan:</p>
+      <ul>
+        <li>External database (managed or hardened internal).</li>
+        <li>Backups for controller and database.</li>
+        <li>Integration with LDAP/SSO.</li>
+        <li>Execution Environments registry strategy.</li>
+      </ul>
+    </section>
+  </main>
+
+  <aside class="right-col">
+    <h3>Related Articles</h3>
+    <ul>
+      <li><a href="docker-notes.html">General Docker Notes — Build, Deploy, Troubleshoot</a></li>
+      <li><a href="aria-day2-operations.html">VMware Aria Day-2 Operations — Start, Stop, Update</a></li>
+    </ul>
+
+    <h3>More</h3>
+    <ul>
+      <li><a href="../publications.html">All Publications</a></li>
+    </ul>
+  </aside>
+</div>
+
+<footer>
+  © 2024 Technosa. All rights reserved.
+</footer>
+
+</body>
+</html>

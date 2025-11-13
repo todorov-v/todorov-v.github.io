@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>General Docker Notes – Technosa</title>
+  <link rel="stylesheet" href="../style.css"/>
+</head>
+<body>
+
+<header>
+  <h1>Technosa. Passion for Technology</h1>
+</header>
+
+<nav>
+  <a href="../index.html">Home</a>
+  <a href="../about.html">About</a>
+  <a href="../projects.html">Projects</a>
+  <a href="../publications.html">Publications</a>
+</nav>
+
+<div class="container">
+  <main class="main-col">
+    <section class="section">
+      <h2>General Docker Notes — Build, Deploy, Troubleshoot</h2>
+      <p class="muted">A concise, practical memo for daily Docker work: images, containers, logs, networking, and debugging.</p>
+    </section>
+
+    <section class="section">
+      <h3>1) Building Images</h3>
+      <ul>
+        <li>Use a small base image (e.g. <code>alpine</code> or <code>debian:bookworm-slim</code>).</li>
+        <li>Pin versions for repeatable builds.</li>
+        <li>Use multi-stage builds for smaller production images.</li>
+      </ul>
+      <pre><code>docker build -t myapp:1.0 .
+docker images
+</code></pre>
+      <p><strong>Example multi-stage build:</strong></p>
+      <pre><code>FROM node:20-alpine AS build
+WORKDIR /app
+COPY . .
+RUN npm ci && npm run build
+
+FROM nginx:1.27-alpine
+COPY --from=build /app/dist/ /usr/share/nginx/html
+EXPOSE 80
+</code></pre>
+    </section>
+
+    <section class="section">
+      <h3>2) Running & Deploying Containers</h3>
+      <pre><code>docker run -d --name web -p 8080:80 org/myapp:1.0
+docker exec -it web /bin/sh
+docker logs -f web
+</code></pre>
+      <p><strong>Compose example:</strong></p>
+      <pre><code>version: "3.9"
+services:
+  web:
+    image: org/myapp:1.0
+    ports: ["8080:80"]
+    depends_on: ["db"]
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_PASSWORD: secret
+</code></pre>
+    </section>
+
+    <section class="section">
+      <h3>3) Networking & Volumes</h3>
+      <pre><code>docker network create app-net
+docker run -d --network app-net --name web org/myapp:1.0
+docker volume ls
+docker volume inspect pgdata
+</code></pre>
+      <ul>
+        <li>Use custom bridge networks for inter-container DNS.</li>
+        <li>Use volumes for persistent data.</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h3>4) Troubleshooting Tips</h3>
+      <ul>
+        <li>Use <code>docker ps</code>, <code>logs</code>, <code>inspect</code> for diagnostics.</li>
+        <li>Run <code>docker exec -it container /bin/sh</code> to debug interactively.</li>
+        <li>Verify port mappings with <code>docker port</code>.</li>
+        <li>Use <code>docker system prune</code> to clean unused data.</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h3>5) Security & Maintenance</h3>
+      <ul>
+        <li>Rebuild images regularly to patch base image CVEs.</li>
+        <li>Use <code>HEALTHCHECK</code> and resource limits (<code>--memory</code>, <code>--cpus</code>).</li>
+        <li>Avoid running as root inside containers.</li>
+        <li>Tag images semantically and avoid <code>latest</code> in production.</li>
+      </ul>
+    </section>
+  </main>
+
+  <aside class="right-col">
+    <h3>Related Articles</h3>
+    <ul>
+      <li><a href="aria-day2-operations.html">VMware Aria Day-2 Operations — Start, Stop, Update</a></li>
+      <li><a href="aap-2-5-5-install.html">Install Ansible Automation Platform 2.5.5</a></li>
+    </ul>
+  </aside>
+</div>
+
+<footer>
+  © 2024 Technosa. All rights reserved.
+</footer>
+
+</body>
+</html>
